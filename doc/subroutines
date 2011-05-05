@@ -1,0 +1,204 @@
+list of subroutines in /source
+==============================
+
+boundary.f90
+	subroutine bound(w)
+
+chemistry.f90
+	subroutine initchem(q)
+	subroutine chem(q)
+	subroutine compbackground()
+	subroutine ncheck(n)
+
+cie.f90
+	subroutine cie(rho,press,n)
+	subroutine cieabundance(n,chemrate)
+	subroutine implicitcie(n,chemrate)
+	subroutine rf_cie(m,in1,in2,chemrate)
+	real(8) function fne(ne,chemrate)
+	subroutine cieions(nHII,nHeII,nHeIII,ne,chemrate)
+
+comp.f90
+	subroutine q2w(q,w)
+	subroutine pressure(q,press)
+	subroutine press2temp(press,rho,n,temp)
+	subroutine temp2press(temp,rho,n,press)
+	subroutine w2n(w,n)
+	subroutine jeanslength(rho,press,jeans)
+	subroutine coordinates(ix,iy,iz,x,y,z)
+	subroutine statistic(a)
+	subroutine compstate(q,state)
+	subroutine kvalue(i,n,nyq,k)
+
+conduction.f90
+	subroutine thermalconduction(q,w) 
+	subroutine thermalflux(templ,tempr,nel,ner,j,deltainv)
+	subroutine thermalintegration(jl,jr,q,delta)
+
+cooltest.f90
+	program cooltest
+
+cosmology.f90
+	subroutine cosmostart()
+	subroutine compcosmo()
+	subroutine expansion(q)
+	subroutine peebles(fpeebles)
+	real(8) function adot2(a)
+	real(8) function dcosmodt(t,a)
+	real(8) function peeblesint(a)
+	subroutine rungekutta(f,x,dx,ode)
+	subroutine trapezoid(int,a,b,delta,f)
+
+fft.f90
+	subroutine gravstart()
+	subroutine gravstop()
+	subroutine fft_c2c_forward(a)
+	subroutine fft_c2c_backward(a)
+	subroutine fft_c2c_power(a)
+
+global.f90
+	module global
+
+gravitation.f90
+	subroutine gravpotential(q,phi)
+	subroutine multigreen(phi)
+	subroutine gravintegration(q,phi,phibuf2,phibuf4)
+	subroutine grav_force(phi,phibuf2,phibuf4,ix,iy,iz,f)
+
+main.f90
+	program evora
+
+muscl.f90
+	subroutine primitive(w,q)
+	subroutine compevo(w,evo,s)
+	subroutine comp_slope(wl,w,wr,s)
+	subroutine sweep(w,q,evo,s)
+	subroutine integration(fl,fr,q,delta)
+
+ncie.f90
+	subroutine ncie(rho,press,n)
+	subroutine ncie_explicit(rho,press,n)
+	subroutine patankarH(n,ne,cdt,chemrate)
+	subroutine patankarHe(n,ne,cdt,chemrate)
+
+parallel.f90
+	subroutine decomposition()
+	subroutine bcasttime()
+	subroutine bcastunits()
+	subroutine bcastcoef()
+	subroutine reducestep()
+	subroutine reducesumdouble(a)
+	subroutine reducemaxdouble(a)
+	subroutine reducemindouble(a)
+	subroutine allreducesumdouble(a)
+	subroutine allreducesumint(a)
+	subroutine bcastdouble(a)
+	subroutine bcastlogical(a)
+	subroutine bcastinteger(a)
+	subroutine bcastarray(a,b)
+	subroutine reducedoublearray(a,ared,n)
+	subroutine reduceintarray(a,ared,n)
+	subroutine barrier()
+	subroutine communicate(w,buf1,buf2,buf3,buf4)
+	subroutine gravcomm(phi,phibuf1,phibuf2,phibuf3,phibuf4)
+
+parameter.f90
+	subroutine readparameter()
+	subroutine bcastparameter()
+	subroutine compparameter()
+	subroutine writeparameter()
+	   subroutine rereadparameter()
+
+post.f90
+	program post
+	subroutine cuts_and_slices(infile)
+	subroutine bovs(infile,var)
+	subroutine phasediagram(infile,option)
+	subroutine powerspectrum(infile,option)
+	   
+rates.f90
+	subroutine compcoef()
+	subroutine comprates(temp,chemrate,coolrate)
+	subroutine cool(n,coolrate,lambda,gamma)
+
+riemann.f90
+	subroutine riemannsolver(wl,wr,f,dir)
+	subroutine hll(wl,wr,f,dir)
+	subroutine hllc(wl,wr,f,dir)
+	subroutine flux(w,f,dir)
+	subroutine state(w,q)
+	subroutine statex(w,qx,s,sm,dir)
+
+snapshot.f90
+	subroutine startupscreen()
+	subroutine screen(k1,k)
+	subroutine evolution(k2,q)
+	subroutine snapshot(k3,q)
+	subroutine endscreen
+
+startstop.f90
+	subroutine startevora
+	subroutine stopevora()
+	subroutine cleanstop()
+
+timestep.f90
+	subroutine hydrostep(w)
+	subroutine cosmostep()
+	subroutine thermalstep(q,w)
+	subroutine coolstep(q,w)
+	subroutine updatetime(go)
+	subroutine cosmoend
+
+units.f90
+	subroutine compunits()
+	subroutine writeunits(name)
+	subroutine readunits(name)
+
+write.f90
+	subroutine dump(q,name)
+	subroutine writedata(a,nn,filename)
+	subroutine writebovhead(name,var,dir)
+	subroutine writecut(a,n,ncut,infile,name)
+	subroutine writeslice(a,n1,n2,nslice,infile,name)
+	subroutine checkfile(ierror,filename)
+	subroutine opendata(i,infile)
+	subroutine getstring(i,a)
+
+list of subroutines in /ic
+==========================
+blastwave.f90
+	subroutine ic(q)
+
+blobtest.f90
+	subroutine ic(q)
+
+bryan.f90
+	subroutine ic(q)
+
+bullet.f90
+	subroutine ic(q)
+	subroutine noiseomator(u,v,w,c,x,y,z)
+
+cosmo.f90
+	subroutine ic(q)
+	subroutine initrandom(seed)
+	real(8) function gaussian()
+
+doubleblast.f90
+	subroutine ic(q)
+
+grafic.f90
+	subroutine ic(q)
+
+kevinhelmholtz.f90
+	subroutine ic(q)
+
+pancake.f90
+	subroutine ic(q)
+
+shockcloud.f90
+	subroutine ic(q)
+shocktube.f90
+	subroutine ic(q)
+thermaltest.f90
+	subroutine ic(q)

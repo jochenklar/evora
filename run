@@ -1,0 +1,27 @@
+#! /bin/bash
+
+if test $1
+then
+    make
+
+    bin/prepare
+
+    if test $2
+    then
+	time mpiexec -n $2 bin/evora $1
+    else
+	time bin/evora $1
+    fi
+
+    echo
+
+    
+    bin/post cs in
+    bin/post cs out
+else
+    echo "ERROR: give argument!"
+    echo "Usage: ./run <parameterfile> <no. of processors>"
+fi
+
+
+

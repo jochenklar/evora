@@ -1,0 +1,23 @@
+This is a parameter-file for the mighty evora code
+
+some hints:
+limiters: (1) minmod, (2) superbee
+boundary cond.: (1) free-flow, (2) periodic, (3) scloud
+
+$para
+secondorder = .true.,
+solver = 2, limiter = 1
+atomic = .true., g = 1.666667, cfl = 0.5
+
+nx = 32, ny = 32, nz = 32
+xmin = -0.5, xmax = 0.5
+ymin = -0.5, ymax = 0.5
+zmin = -0.5, zmax = 0.5
+boundtype = 1
+
+tstart = 0, tend = 0.06
+
+de_thresh = 1d-3
+
+cut = .f., slice = .f,, bov = .f.
+/

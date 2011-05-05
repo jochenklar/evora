@@ -1,0 +1,48 @@
+'This is a parameter-file for the mighty evora code
+
+some hints:
+limiters: (1) minmod, (2) superbee
+boundary cond.: (1) free-flow, (2) periodic, (3) scloud
+
+hint for chemisty: cie -> cfl lower (cooling length)
+
+$para
+iconly = .f.
+solver = 2, limiter = 1
+cfl = 0.5 , g = 1.6667 , atomic = .t.
+
+nx = 1024, ny = 1, nz = 1
+xmin = -0.5, xmax = 0.5
+boundtype = 2
+
+supercomoving = .true., c_cosmo = 0.01
+omega0 = 0.27, lambda0 = 0.73, hubble0 = 71.0
+box = 16.0 , fb = 0.16
+zstart = 99.0, zend = 0.0
+
+gravity = .true.
+
+chemistry = .t., noncie = .t. , cooling = .t.,
+background = .t., bg = 3, j0 = 1d-21
+c_chem = 0.1 
+
+tempfloor = .t., temp_fl = 1.0
+
+jeansfloor = .f., c_jeans = 0.05
+
+conduction = .t., c_cond = 0.9
+
+dualenergy = .t., de_thresh = 1d-3
+
+cut = .t.
+nsnap = 200
+
+!dump_redshift(1) = 10.0
+!dump_redshift(2) = 2.543434
+!dump_redshift(3) = 0.001
+/
+
+$ic_para
+ampx = 2.0  , kx  = 1.0
+!maxmode = 0.1
+/

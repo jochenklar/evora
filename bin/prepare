@@ -1,0 +1,6 @@
+#! /bin/bash
+
+echo "preparing..."
+rm -f out/*
+rm -f data/*
+rm -f snap/*

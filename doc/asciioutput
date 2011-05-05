@@ -1,0 +1,103 @@
+legend for ascii output files
+=============================
+
+output analyse.x 1D
+-------------------
+ 1 ->	x
+ 2 ->	delta	
+ 3 ->	mx
+ 4 ->	my
+ 5 ->	mz
+ 6 ->	E
+ 7 ->	S
+ 8 ->	rho
+ 9 ->	u
+10 ->	v
+11 ->	w
+12 ->	p
+13 ->	T
+14 ->	xi_HI
+15 ->	xi_HII
+16 ->	xi_HeI
+17 ->	xi_HeII
+18 ->	xi_HeIII
+19 ->	xi_e
+20 ->	n_HI
+21 ->	n_HII
+22 ->	n_HeI
+23 ->	n_HeII
+24 ->	n_HeIII
+25 ->	n_e
+
+output analyse.x 2D
+-------------------
+ 1 ->	x
+ 2 ->	y
+ 3 ->	delta	
+ 4 ->	mx
+ 5 ->	my
+ 6 ->	mz
+ 7 ->	E
+ 8 ->	S
+ 9 ->	rho
+10 ->	u
+11 ->	v
+12 ->	w
+13 ->	p
+14 ->	T
+15 ->	xi_HI
+16 ->	xi_HII
+17 ->	xi_HeI
+18 ->	xi_HeII
+19 ->	xi_HeIII
+20 ->	xi_e
+21 ->	n_HI
+22 ->	n_HII
+23 ->	n_HeI
+24 ->	n_HeII
+25 ->	n_HeIII
+26 ->	n_e
+
+output line.x
+-------------
+ 1 ->	r
+ 2 ->	x	
+ 3 ->	y
+ 4 ->	z
+ 5 ->	delta
+ 6 ->	v_r
+ 7 ->	T
+ 8 ->	n_HI
+ 9 ->	n_HII
+10 ->	n_HeI
+11 ->	n_HeII
+12 ->	n_HeIII
+13 ->	n_e
+
+output spectrum.x
+-----------------
+ 1 ->	u
+ 2 ->	tau	
+ 3 ->	exp(-tau)
+
+
+output evora.x evo
+------------------
+ 1 ->	t
+ 2 ->	dt
+ 3 ->	cosmo
+ 4 ->	redshift
+ 5 ->	totalmass
+ 6 ->	totalenergy
+ 7 ->	totalentropy
+ 8 ->	meantemp
+ 9 ->	tempmax
+10 ->	jeansnumbermax
+11 ->	templfloormax
+12 ->	uv
+13 ->	dl
+14 ->	dr
+15 ->	templ
+16 ->	tempr
+17 ->	pressl
+18 ->	pressr

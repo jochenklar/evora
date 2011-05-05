@@ -1,0 +1,443 @@
+#!/usr/bin/env python
+
+#=====================================================================#
+# runs all tests from my thesis automatically and stores the output   #
+# figures, as well as the parameter files in a directory 'test'       #
+#=====================================================================#
+
+shocktube         = 1
+singlepancake     = 1
+doublepancake     = 1
+thermalconduction = 1
+blastwave         = 1
+
+# imports
+import os,sys
+
+def main():
+    # create directory
+    try:
+        os.mkdir('test')
+    except OSError:
+        sys.exit('directory "test" already exists, exiting')
+    
+    # shocktube test
+    if shocktube:        
+        # change/create files
+        writeStringToFile("test/shocktube",shocktubeParaString)
+        writeStringToFile("test/shocktube.gnu",shocktubeGnuplotString)
+        changeIcInMakefile('shocktube')
+        # run code
+        os.system('./run test/shocktube')
+        # copy output
+        os.system('cp out/out.x.cut test/shocktube.out')
+        # run gnuplot
+        os.system('gnuplot test/shocktube.gnu')
+
+    # single pancake test
+    if singlepancake:
+        # change/create files
+        writeStringToFile("test/singlepancake",singlepancakeParaString)
+        writeStringToFile("test/singlepancake.gnu",singlepancakeGnuplotString)
+        changeIcInMakefile('bryan')
+        # run code
+        os.system('./run test/singlepancake')
+        # copy output
+        os.system('cp out/out.x.cut test/singlepancake.out')
+        # run gnuplot
+        os.system('gnuplot test/singlepancake.gnu')
+    
+    # double pancake test
+    if doublepancake:
+        # change/create files
+        writeStringToFile("test/doublepancake",doublepancakeParaString)
+        writeStringToFile("test/doublepancake.gnu",doublepancakeGnuplotString)
+        changeIcInMakefile('bryan')
+        # run code
+        os.system('./run test/doublepancake')
+        # copy output
+        os.system('cp out/out.x.cut test/doublepancake.out')
+        # run gnuplot
+        os.system('gnuplot test/doublepancake.gnu')
+        
+    # thermal conduction test
+    if thermalconduction:
+        # change/create files
+        writeStringToFile("test/thermalconduction",thermalconductionParaString)
+        writeStringToFile("test/thermalconduction.gnu",thermalconductionGnuplotString)
+        changeIcInMakefile('thermaltest')
+        # run code
+        os.system('./run test/thermalconduction')
+        # copy output
+        os.system('cp out/out.x.cut test/thermalconduction.out')
+        # run gnuplot
+        os.system('gnuplot test/thermalconduction.gnu')       
+         
+    # blastwave test with mpi
+    if blastwave:
+        # change/create files
+        writeStringToFile("test/blastwave",blastwaveParaString)
+        writeStringToFile("test/blastwave.gnu",blastwaveGnuplotString)
+        changeIcInMakefile('blastwave')
+        # run code
+        os.system('./run test/blastwave 4')
+        # copy output
+        os.system('cp out/out.xy.slice test/blastwave.xy.out')
+        os.system('cp out/out.xz.slice test/blastwave.xz.out')
+        # run gnuplot
+        os.system('gnuplot test/blastwave.gnu')
+
+#=====================================================================#
+# helper functions                                                    #
+#=====================================================================#
+
+def writeStringToFile(filename,sting):
+    f = open(filename,'w')
+    f.write(sting)
+    f.close()
+
+def changeIcInMakefile(string):
+    os.system('sed -i -e "s/^IC.*/IC = %s/" Makefile' % string)
+
+#=====================================================================#
+# parameter files                                                     #
+#=====================================================================#
+
+shocktubeParaString = \
+'''automatically generated namelist for the shocktube test
+
+$para
+nx = 1024, ny = 1, nz = 1
+xmin = 0.0, xmax = 1.0
+boundtype = 3
+tstart= 0.0, tend= 0.2
+/
+$ic_para
+dl = 1.0, dr = 0.125, ul = 0.0, ur = -0.0, pl = 1.0, pr = 0.1, x_diss = 0.5
+dir = 1
+/
+'''
+
+singlepancakeParaString = \
+'''automatically generated namelist for the single pancake test
+
+$para
+cfl = 0.5 , g = 1.6667 , atomic = .true.
+nx = 1024, ny = 1, nz = 1
+xmin = 0, xmax = 1
+boundtype = 2
+supercomoving = .true., c_cosmo = 0.01
+omega0 = 1.0, lambda0 = 0.0, hubble0 = 100.0, box = 64.0
+zstart = 99, zend = 0.0
+tempfloor = .t., temp_fl = 1.0
+gravity = .true.
+dualenergy = .t., de_thresh = 1e-6
+/
+$ic_para
+ampx = -2.0  , kx  = 1.0
+/
+'''
+
+doublepancakeParaString = \
+'''automatically generated namelist for the double pancake test
+
+$para
+cfl = 0.5 , g = 1.6667 , atomic = .true.
+nx = 1024, ny = 1, nz = 1
+xmin = 0, xmax = 1
+boundtype = 2
+supercomoving = .true., c_cosmo = 0.01
+omega0 = 1.0, lambda0 = 0.0, hubble0 = 100.0, box = 64.0
+zstart = 99, zend = 0.0
+tempfloor = .t., temp_fl = 1.0
+gravity = .true.
+dualenergy = .t., de_thresh = 1e-6
+/
+$ic_para
+ampx = -2.0  , kx  = 1.0
+ampx2 = -2.45 , kx2 = 4.0
+/
+'''
+
+thermalconductionParaString = \
+'''automatically generated namelist for the thermal conduction test
+
+$para
+hydro = .false.
+cfl = 0.5 , g = 1.6667 , atomic = .true.
+nx = 100, ny = 1, nz = 1
+xmin = 0, xmax = 100
+boundtype = 1
+tstart= 0, tend= 10
+conduction = .t., c_cond = 0.9, simplekappa = .t.
+/
+'''
+
+blastwaveParaString = \
+'''automatically generated namelist for the blast wave test
+
+$para
+g = 1.4, cfl = 0.5, atomic = .false.
+
+nx = 32, ny = 32, nz = 32
+xmin = -0.5, xmax = 0.5
+ymin = -0.5, ymax = 0.5
+zmin = -0.5, zmax = 0.5
+boundtype = 1
+
+tstart= 0, tend= 0.0508
+/
+
+$ic_para
+d0 = 1.0, p0= 1e-5
+r0 = 0.109375
+e0 = 1.0
+/
+'''
+
+#=====================================================================#
+# gnuplot scripts                                                     #
+#=====================================================================#
+
+shocktubeGnuplotString = \
+'''# automatically created gnuplot script for the shocktube test
+###
+set terminal postscript enhanced size 12cm,8cm eps color
+unset key
+set output "test/shocktube.eps"
+###
+file = 'out/out.x.cut'
+###
+set style line 11 lt 1 lc rgb "black" lw 1
+set style line 12 lt 1 lc rgb "dark-blue"  lw 1
+set style line 22 lt 1 lc rgb "dark-green" lw 1
+set style line 32 lt 1 lc rgb "blue"       lw 1
+set style line 42 lt 1 lc rgb "dark-red"   lw 1
+###
+set xrange [0:1]
+set xtics format "%1.1f" 0.2
+set xlabel "x" offset 0,0.5
+###
+h  = 0.4
+hg = 0.1
+h0 = 0.075
+###
+v  = 0.4
+vg = 0.1
+v0 = 0.975
+###
+set multiplot
+###
+set tmargin screen v0
+set bmargin screen v0-v
+###
+set lmargin screen h0
+set rmargin screen h0+h
+###
+set yrange [0:1.05]
+set ytics format "%1.1f" 0.2
+set ylabel "{/Symbol r}" offset 0.5,0
+###
+plot file u 1:2 w l ls 12
+###
+set lmargin screen h0+h+hg
+set rmargin screen h0+2*h+hg
+###
+set yrange [-0.05:1.0]
+set ytics format "%1.1f" 0.2
+set ylabel "v" offset 0.5,0
+###
+plot file u 1:($3/$2) w l ls 22
+###
+set tmargin screen v0-v-vg
+set bmargin screen v0-2*v-vg
+###
+set lmargin screen h0
+set rmargin screen h0+h
+###
+set yrange [0:1.05]
+set ytics format "%1.1f" 0.2
+set ylabel "p" offset 0.5,0
+###
+plot file u 1:12 w l ls 32
+###
+set lmargin screen h0+h+hg
+set rmargin screen h0+2*h+hg
+###
+set yrange [1.7:3.0]
+set ytics format "%1.1f" 0.2
+set ylabel "{/Symbol e}" offset 0.5,0
+###
+plot file u 1:($12/$2/0.4) w l ls 42
+###
+unset multiplot    
+'''
+
+pancakeGnuplotString = \
+'''###
+set terminal postscript enhanced size 12cm,8cm eps color
+unset key
+set output sprintf('%s',eps)
+box = 64.0
+###
+set style line 1 lt 1 lc rgb "dark-blue"  lw 1
+set style line 2 lt 1 lc rgb "dark-green" lw 1
+set style line 3 lt 1 lc rgb "blue"       lw 1
+set style line 4 lt 1 lc rgb "dark-red"   lw 1
+###
+set xtics format "%g"
+set xlabel "x" offset 0,0.5
+###
+h  = 0.4
+hg = 0.1
+h0 = 0.075
+###
+v  = 0.4
+vg = 0.1
+v0 = 0.975
+###
+set multiplot
+###
+set tmargin screen v0
+set bmargin screen v0-v
+###
+set lmargin screen h0
+set rmargin screen h0+h
+###
+set log y
+set yrange [0.1:200]
+set ytics format "%T"
+set ylabel 'log({/Symbol r} / ~{/Symbol r}{0.85\_}_b)' offset -0.1,0
+###
+plot file u ($1*box):2 w l ls 1
+###
+set lmargin screen h0+h+hg
+set rmargin screen h0+2*h+hg
+###
+unset log y
+set yrange [-2.5:2.5]
+set ytics format "%1.1f"
+set ylabel "v [10^3 km/s]" offset 1.5,0
+###
+plot file u ($1*box):($9*1e-8) w l ls 2
+###
+set tmargin screen v0-v-vg
+set bmargin screen v0-2*v-vg
+###
+set lmargin screen h0
+set rmargin screen h0+h
+###
+set log y
+set yrange [1e-22:*]
+set ytics format "%T"
+set ylabel "log(p) [dyn/cm^2]" offset 1,0
+###
+plot file u ($1*box):12 w l ls 3
+###
+set lmargin screen h0+h+hg
+set rmargin screen h0+2*h+hg
+###
+set log y
+set yrange [0.5:1e9]
+set ytics format "%T" auto
+set ylabel "log(T) [K]" offset 0,0
+###
+plot file u ($1*box):13 w l ls 4
+'''
+
+singlepancakeGnuplotString = \
+'''# automatically created gnuplot script for the single pancake test
+###
+eps  = 'test/singlepancake.eps'
+file = 'test/singlepancake.out'
+set xrange [24:40]
+''' + pancakeGnuplotString
+
+doublepancakeGnuplotString = \
+'''# automatically created gnuplot script for the double pancake test
+###
+eps  = 'test/doublepancake.eps'
+file = 'test/doublepancake.out'
+set xrange [16:48]
+''' + pancakeGnuplotString
+
+thermalconductionGnuplotString = \
+'''# automatically created gnuplot script for the thermal conduction test
+###
+file = 'test/thermalconduction.out'
+###
+set terminal postscript enhanced size 12cm,6cm eps color
+set output 'test/thermalconduction.eps'
+unset key
+###
+set style line 1 lt 1 lc rgb "red" lw 1 pt 7 ps 0.5
+set style line 2 lt 1 lc rgb "grey" lw 2
+set style line 3 lt 1 lc rgb "black" lw 2
+###
+set lmargin screen 0.1
+set rmargin screen 0.96
+set bmargin screen 0.12
+set tmargin screen 0.92
+###
+set xrange[30:70]
+set xlabel "x" offset 0,0.2
+###
+set yrange[350:850]
+set ytics format "%g"
+set ylabel "T" offset 0,0
+###
+set samples 1e4
+###
+plot 600 + 200*(x<50?-1:1) ls 3,\
+     600 + 200*erf((x-50)/(2*sqrt(10))) ls 2,\
+     file u 1:13 w p ls 1
+'''
+
+blastwaveGnuplotString = \
+'''# automatically created gnuplot script for the blastwave test
+###
+file1 = 'test/blastwave.xy.out'
+file2 = 'test/blastwave.xz.out'
+###
+set terminal postscript enhanced size 12cm,6cm eps color
+set output 'test/blastwave.eps'
+unset key
+###
+set style line 1 lt 1 lc rgb "dark-blue" lw 2
+###
+set xrange[-0.5:0.5]
+set yrange[-0.5:0.5]
+###
+unset xtics
+unset ytics
+###
+set cbrange[0:3]
+set cbtics 1
+set cblabel "log({/Symbol r})" offset -1,0
+set palette defined ( 0 "white", 1 "blue", 2 "red", 3 "yellow")
+###
+set multiplot
+###
+set bmargin screen 0.06
+set tmargin screen 0.90
+###
+set lmargin screen 0.02
+set rmargin screen 0.44
+###
+unset colorbox
+set title "xy" offset 0,-0.5
+plot file1 u 1:2:3 w imag
+###
+set lmargin screen 0.48
+set rmargin screen 0.90
+###
+set colorbox
+set title "xz" offset 0,-0.5
+plot file2 u 1:2:3 w imag
+###
+unset multiplot
+'''
+#=====================================================================#
+
+if __name__ == "__main__":
+    main()

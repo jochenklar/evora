@@ -1,0 +1,27 @@
+This is a parameter-file for the mighty evora code
+
+some hints:
+limiters: (1) minmod, (2) superbee
+boundary cond.: (1) free-flow, (2) periodic, (3) scloud
+
+$para
+secondorder = .true., limiter = 1, atomic = .true.
+g = 1.666667, cfl = 0.3
+
+nx = 256, ny = 64, nz = 64
+xmin = 0, xmax = 40
+ymin = 0, ymax = 10
+zmin = 0, zmax = 10
+
+boundtype = 1
+
+tstart= 0, tend= 5.0
+
+cut = .t., slice = .t., bov = .t.
+/
+
+$ic_para
+d0 = 1.0, u0 = 2.7, v0 = 0.0, w0 = 0.0, p0 = 1.0 
+r1 = 1.0, x1 = 5.0, y1 = 5.0, z1 = 5.0 
+d1 = 10.0, u1 = 0.0, v1 = 0.0, w1 = 0.0, p1 = 1.0
+/

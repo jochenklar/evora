@@ -1,0 +1,23 @@
+This is a parameter-file for the mighty evora code
+
+some hints:
+solvers: (1) hll, (2) hllc
+limiters: (1) minmod, (2) superbee
+boundary cond.: (1) free-flow, (2) periodic
+
+$para
+secondorder = .true., 
+solver = 2, limiter = 2, boundtype = 2
+cfl = 0.5 , g = 1.4 , atomic = .false.
+nx = 128, ny = 128, nz = 1
+xmin = 0, xmax = 1
+ymin = 0, ymax = 1
+zmin = 0, zmax = 1
+
+conduction = .f.
+
+slice = .t.
+
+tstart= 0, tend= 2.0
+/
+

@@ -1,0 +1,35 @@
+This is a parameter-file for the mighty evora code
+
+some hints:
+limiters: (1) minmod, (2) superbee
+boundary cond.: (1) free-flow, (2) periodic, (3) scloud
+
+hint for chemisty: cie -> cfl lower (cooling length)
+
+$para
+secondorder = .true., 
+solver = 2, limiter = 1
+cfl = 0.5 , g = 1.6667 , atomic = .true.
+
+nx = 64, ny = 1, nz = 1
+xmin = 0, xmax = 1
+boundtype = 2
+
+supercomoving = .true., c_cosmo = 0.01
+omega0 = 1.0, lambda0 = 0.0, hubble0 = 100.0, box = 64.0
+zstart = 99, zend = 0.0
+
+tempfloor = .t., temp_fl = 1.0
+
+gravity = .true.
+
+dualenergy = .t., de_thresh = 1e-6
+/
+
+$ic_para
+! first mode
+ampx = -2.0  , kx  = 1.0
+
+! second mode (for double pancake)
+ampx2 = -2.45 , kx2 = 4.0
+/

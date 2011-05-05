@@ -1,0 +1,9 @@
+#! /bin/bash
+
+echo "cleaning up..."
+make clean
+rm -f data/*
+rm -fr data/ic
+rm -f out/*
+rm -f snap/*
+rm -rf test
