@@ -151,7 +151,7 @@ subroutine evolution(k2,q)
   endif
 
   if (master) then
-     open (unit=32, file="out/evo", access="sequential", &
+     open (unit=32, file="data/evo", access="sequential", &
           status="unknown", position="append")
      if (k2 .eq. 0) write (32,'(A,A15,23A16)') "#","t","dt","a","z",&
           "totalmass","totalenergy","totalentropy"

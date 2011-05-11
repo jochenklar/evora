@@ -8,7 +8,7 @@ SYSTEM = "canis"
 
 #-----------------------------------------------------------------------
 
-IC = pancake
+IC = blastwave
 CHEM = -DCIE -DNONCIE
 
 # OPTIONS: blastwave,shockcloud,blobtest,bullet,shocktube,
