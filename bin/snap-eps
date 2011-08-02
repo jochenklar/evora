@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+import os,sys
+
+template = 'plot/slice.gnu'
+snapdir  = 'snap'
+epsdir   = 'snap-eps'
+suffix   = 'xy'
+tmpfile  = '/tmp/snap.gnu'
+
+# parse template file into template string
+FILE    = open(template,'r')
+template = ''
+for line in FILE:
+    if not line.startswith('#'):
+        template += line
+FILE.close()
+
+# create snap-eps directory
+try: os.mkdir('snap-eps')
+except OSError: pass
+
+# creat filelists
+snapfiles = []
+epsfiles  = []
+for filename in sorted(os.listdir(snapdir)):
+    if filename.endswith('.' + suffix):
+        snapfile = snapdir + '/' + filename
+        epsfile  = epsdir + '/' + filename + '.eps'
+        snapfiles.append(snapfile)
+        epsfiles.append(epsfile)
+
+# write and execute file for every file in list
+for snapfile,epsfile in zip(snapfiles,epsfiles):
+    FILE = open(tmpfile ,'w')
+    FILE.write('file = "' + snapfile + '"\n')
+    FILE.write('epsfile = "' + epsfile + '"\n')
+    FILE.write(template)
+    FILE.close()
+    print snapfile
+    os.system('gnuplot %s' % tmpfile)
+
+# clean up
+os.system('rm -f %s' % tmpfile)
+print 'done!'

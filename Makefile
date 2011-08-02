@@ -2,13 +2,11 @@
 # A nice Makefile for the mighty "evora" hydrocode
 #-----------------------------------------------------------------------
 
-SYSTEM = "canis"
-
-# OPTIONS: canis,babel,gprof
+SYSTEM = "default"
 
 #-----------------------------------------------------------------------
 
-IC = blastwave
+IC = shockcloud
 CHEM = -DCIE -DNONCIE
 
 # OPTIONS: blastwave,shockcloud,blobtest,bullet,shocktube,
@@ -24,13 +22,6 @@ FC = mpif90
 FFLAG = -O3
 FPP = -x f95-cpp-input
 FFTWDIR = /opt/fftw-2.1.5
-endif
-
-ifeq ($(SYSTEM),"canis")
-FC = mpif90
-FFLAG = -O3 #-Wall -pedantic
-FPP = -x f95-cpp-input
-FFTWDIR = /home/jochen/install/fftw2
 endif
 
 ifeq ($(SYSTEM),"gprof")
