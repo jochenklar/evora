@@ -1,0 +1,15 @@
+syntax: glob
+*.png
+*.eps
+*.avi
+*log
+*.mod
+*.o
+bin/evora
+bin/post
+bin/cooltest
+data/*
+eps/*
+out/*
+snap/*
+test/*
