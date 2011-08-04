@@ -6,7 +6,7 @@ SYSTEM = "default"
 
 #-----------------------------------------------------------------------
 
-IC = shockcloud
+IC = kevinhelmholtz
 CHEM = -DCIE -DNONCIE
 
 # OPTIONS: blastwave,shockcloud,blobtest,bullet,shocktube,

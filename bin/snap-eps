@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
-import os,sys
+import os,sys,commands
 
-template = 'plot/slice.gnu'
+try:
+    template = sys.argv[1]
+except IndexError:
+    template = 'plot/slice.gnu'
+
 snapdir  = 'snap'
 epsdir   = 'snap-eps'
 suffix   = 'xy'
@@ -38,7 +42,7 @@ for snapfile,epsfile in zip(snapfiles,epsfiles):
     FILE.write(template)
     FILE.close()
     print snapfile
-    os.system('gnuplot %s' % tmpfile)
+    status,output = commands.getstatusoutput('gnuplot %s' % tmpfile)
 
 # clean up
 os.system('rm -f %s' % tmpfile)

@@ -14,10 +14,9 @@ xmin = 0, xmax = 1
 ymin = 0, ymax = 1
 zmin = 0, zmax = 1
 
-conduction = .f.
-
+nsnap = 400
 slice = .t.
 
-tstart= 0, tend= 2.0
+tstart= 0, tend= 12.0
 /
 
