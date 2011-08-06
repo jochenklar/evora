@@ -109,6 +109,7 @@ subroutine screen(k1,k)
   implicit none
 
   integer :: k1,k
+  real(8) :: tpro
 
   open (unit=10, file="data/log", access="sequential", &
        status="unknown", position="append")
@@ -118,6 +119,7 @@ subroutine screen(k1,k)
      write (10,'(I4,I6,E12.4,E12.4,F12.4,F12.2)') & 
           k1,k,t,dt,cosmo,redshift
   else
+     tpro = tsnap / nsnap * 100
      write (*,'(I4,I6,E12.4,E12.4,11X,F12.1,A1)') k1,k,t,dt,tpro,'%'
      write (10,'(I4,I6,E12.4,E12.4,11X,F12.1,A1)') k1,k,t,dt,tpro,'%'
   endif     

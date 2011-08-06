@@ -167,16 +167,16 @@ program evora
 
      ! check for timestep
      if (supercomoving) then
-        tpro = cosmo * nsnap
+        tsnap = cosmo * nsnap
      else
-        tpro = (t - tstart)/(tend - tstart) * nsnap
+        tsnap = (t - tstart)/(tend - tstart) * nsnap
      endif
 
-     if (master .and. tpro .ge. dble(k1)) call screen(k1,k)
-     if (tpro .ge. dble(k2)) call evolution(k2,q)
+     if (master .and. tsnap .ge. dble(k1)) call screen(k1,k)
+     if (tsnap .ge. dble(k2)) call evolution(k2,q)
 
      if (cut .or. slice .or. bov) then
-        if (tpro .ge. dble(k3)) call snapshot(k3,q)
+        if (tsnap .ge. dble(k3)) call snapshot(k3,q)
      endif
 
      if (dump) then

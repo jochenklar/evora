@@ -57,7 +57,7 @@ module global
   logical :: onedimension,twodimension
 
   ! time
-  real(8) :: tstart,tend,t,dt,tpro
+  real(8) :: tstart,tend,t,dt,tsnap
   real(8) :: zstart,zend,expand,cosmo,oldcosmo,cosmodot,redshift
 
   ! output
