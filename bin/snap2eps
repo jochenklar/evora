@@ -3,26 +3,24 @@
 import os,sys,commands
 
 try:
-    template = sys.argv[1]
+    templatefile = sys.argv[1]
 except IndexError:
-    template = 'plot/slice.gnu'
+    sys.exit('Error: template file needed')
 
 snapdir  = 'snap'
-epsdir   = 'snap-eps'
+epsdir   = 'eps'
 suffix   = 'xy'
 tmpfile  = '/tmp/snap.gnu'
 
 # parse template file into template string
-FILE    = open(template,'r')
+FILE    = open(templatefile,'r')
 template = ''
 for line in FILE:
-    if not line.startswith('#'):
+    if not (line.startswith('#') \
+            or line.startswith('file') \
+            or line.startswith('epsfile')):
         template += line
 FILE.close()
-
-# create snap-eps directory
-try: os.mkdir('snap-eps')
-except OSError: pass
 
 # creat filelists
 snapfiles = []

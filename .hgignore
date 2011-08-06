@@ -2,6 +2,9 @@ syntax: glob
 *.png
 *.eps
 *.avi
+*.mp4
+*.mov
+*.mpg
 *log
 *.mod
 *.o

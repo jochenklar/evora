@@ -2,8 +2,10 @@
 
 echo "cleaning up..."
 make clean
-rm -f data/*
+rm -f  data/*
 rm -fr data/ic
-rm -f out/*
-rm -f snap/*
+rm -f  out/*
+rm -f  snap/*
 rm -rf test
+rm -f  *log
+rm -f  *.avi *.mp4 *.mov *.mpg
