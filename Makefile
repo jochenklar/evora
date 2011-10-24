@@ -2,11 +2,12 @@
 # A nice Makefile for the mighty "evora" hydrocode
 #-----------------------------------------------------------------------
 
-SYSTEM = "default"
+SYSTEM = "intel"
+FFTWDIR = ~/opt/fftw-2.1.5
 
 #-----------------------------------------------------------------------
 
-IC = kevinhelmholtz
+IC = pancake
 CHEM = #-DCIE -DNONCIE
 
 # OPTIONS: blastwave,shockcloud,blobtest,bullet,shocktube,
@@ -17,25 +18,22 @@ CHEM = #-DCIE -DNONCIE
 # leave no blank behind ! make new after changing Makefile !
 #-----------------------------------------------------------------------
 
-ifeq ($(SYSTEM),"default")
+ifeq ($(SYSTEM),"gnu")
 FC = mpif90
 FFLAG = -O3
 FPP = -x f95-cpp-input
-FFTWDIR = /opt/fftw-2.1.5
 endif
 
 ifeq ($(SYSTEM),"gprof")
 FC = mpif90
 FFLAG = -O0 -pg
 FPP = -x f95-cpp-input
-FFTWDIR = /home/jochen/install/fftw2
 endif
 
-ifeq ($(SYSTEM),"babel")
+ifeq ($(SYSTEM),"intel")
 FC = mpif90
 FFLAG = -assume byterecl
 FPP = -fpp
-FFTWDIR = /home/jochen/install/fftw2
 endif
 
 #-----------------------------------------------------------------------

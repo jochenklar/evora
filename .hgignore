@@ -8,6 +8,7 @@ syntax: glob
 *log
 *.mod
 *.o
+*.pbs
 bin/evora
 bin/post
 bin/cooltest
@@ -16,3 +17,4 @@ eps/*
 out/*
 snap/*
 test/*
+std.*

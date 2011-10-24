@@ -12,7 +12,7 @@ secondorder = .true.,
 solver = 2, limiter = 1
 cfl = 0.5, g = 1.6667 , atomic = .true.
 
-nx = 32, ny = 32, nz = 32
+nx = 512, ny = 512, nz = 512
 xmin = -0.5, xmax = 0.5
 ymin = -0.5, ymax = 0.5
 zmin = -0.5, zmax = 0.5
@@ -25,8 +25,8 @@ zstart = 99.0, zend = 0.0
 
 gravity = .true.
 
-chemistry = .t., noncie = .f. , cooling = .t.,
-background = .t., bg = 3, j0 = 1d-21
+chemistry = .f., noncie = .f. , cooling = .f.,
+background = .f., bg = 3, j0 = 1d-21
 c_chem = 0.1 
 
 tempfloor = .t., temp_fl = 10.0
@@ -37,8 +37,8 @@ conduction = .f., c_cond = 0.9
 
 dualenergy = .t., de_thresh = 1d-3
 
-cut = .f., slice = .f., bov = .f.
-nsnap = 100
+cut = .f., slice = .t., bov = .t.
+nsnap = 200
 
 !dump_redshift(1) = 10.0
 !dump_redshift(2) = 5.0
@@ -48,7 +48,7 @@ nsnap = 100
 
 $ic_para
 ampx  = 2.0, kx = 1.0
-ampx2 = 0.0 , kx2 = 4.0
+!ampx2 = 0.0 , kx2 = 4.0
 ampy  = 2.0, ky = 1.0
 ampz  = 2.0, kz = 1.0
 /

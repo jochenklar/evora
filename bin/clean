@@ -9,3 +9,4 @@ rm -f  snap/*
 rm -rf test
 rm -f  *log
 rm -f  *.avi *.mp4 *.mov *.mpg
+rm -f std.*

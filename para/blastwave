@@ -9,7 +9,7 @@ secondorder = .true.,
 solver = 2, limiter = 1
 g = 1.4, cfl = 0.5, atomic = .false.
 
-nx = 32, ny = 32, nz = 32
+nx = 1024, ny = 1024, nz = 1024
 xmin = -0.5, xmax = 0.5
 ymin = -0.5, ymax = 0.5
 zmin = -0.5, zmax = 0.5

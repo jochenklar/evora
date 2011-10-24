@@ -4,3 +4,5 @@ echo "preparing..."
 rm -f out/*
 rm -f data/*
 rm -f snap/*
+rm -f std.out
+rm -f std.err
