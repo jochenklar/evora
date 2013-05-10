@@ -1,3 +1,4 @@
+=====
 evora
 =====
 
@@ -6,14 +7,14 @@ evora is a hydrodynamic code for the computation of the cosmological evolution o
 The code was developed by Jochen Klar while working on his PhD thesis "A detailed view on filaments and sheets of the warm-hot intergalactic medium". It is is named after the town of Evora, Portugal.v Details about the code can be found in the mentioned PhD thesis, which is publicly available at http://nbn-resolving.de/urn:nbn:de:kobv:517-opus-58038.
 
 How to run it on one machine
-============================
+----------------------------
 
 This assumes a recent linux version, e.g. debian 7.0, Ubuntu 12.04, CentOS 6.3, and gfortran as a free and slow fortran compiler.
 
-Build openmpi
----------------
+**Build openmpi**
 
 ::
+
   cd /directory/where/you/can/build/things
   wget http://www.open-mpi.de/software/ompi/v1.6/downloads/openmpi-1.6.4.tar.gz
   tar xzvf openmpi-1.6.4.tar.gz
@@ -23,10 +24,10 @@ Build openmpi
   sudo make install
   sudo ldconfig
 
-Build fftw-2.1.5
-------------------
+**Build fftw-2.1.5**
 
 ::
+
   cd /directory/where/you/can/build/things
   wget http://www.fftw.org/fftw-2.1.5.tar.gz
   tar xzvf fftw-2.1.5.tar.gz
@@ -36,19 +37,19 @@ Build fftw-2.1.5
   sudo make install
   sudo ldconfig
 
-Edit Makefile
--------------
+**Edit Makefile**
 
 Edit the Makefile in the evora directory for:
 
 ::
+
   SYSTEM = "gnu"
   FFTWDIR = 
 
-Build evora and test it
------------------------
+**Build evora and test it**
 
 ::
+
   cd /path/where/evora/is/located
   make
   bin/test # will compile some more
